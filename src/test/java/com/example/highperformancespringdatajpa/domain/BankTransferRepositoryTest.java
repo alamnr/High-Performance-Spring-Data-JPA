@@ -11,13 +11,34 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
-@AutoConfigureTestDatabase
+@AutoConfigureTestDatabase(replace=Replace.NONE)
+//@Testcontainers
 @TestInstance(Lifecycle.PER_CLASS)
 public class BankTransferRepositoryTest {
 
+    /*
+    @Container
+    //static MySQLContainer container = new MySQLContainer(DockerImageName.parse("mysql:latest"));
+    // withUsername() .withPassword() - usually translated to - 
+    // docker run -e MYSQL_USERNAME=... -e MYSQL_PASSWORD=... mysql:latest 
+    static MySQLContainer container = new MySQLContainer(DockerImageName.parse("mysql:latest"))
+                                                .withDatabaseName("db")
+                                                .withUsername("sa")
+                                                .withPassword("sa");
+       */                                             
+    
+    /*
+    @DynamicPropertySource
+    static void setMySqlProperties(DynamicPropertyRegistry registry) {
+        System.out.println(container.getJdbcUrl()+"  /  "+container.getUsername() + "  /  " + container.getPassword());
+        registry.add("spring.datasource.url", container::getJdbcUrl);
+        //registry.add("spring.datasource.username", container::getUsername);
+        //registry.add("spring.datasource.password", container::getPassword);
+    }  */
     @Autowired
     private BankTransferRepository bankTransferRepository;
     @Autowired
@@ -44,6 +65,7 @@ public class BankTransferRepositoryTest {
     @AfterAll
     void tearDown(){
         bankTransferRepository.deleteAll();
+        //container.stop();
     }
 
     @Test

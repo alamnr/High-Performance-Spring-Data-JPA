@@ -9,6 +9,7 @@ public class SettleBankTransferUsecaseTest {
     @Autowired
     private SettleBankTransferUseCase useCase;
 
+    //@Disabled
     @Test
     void executes() {
         useCase.execute("bank-transfer-id");

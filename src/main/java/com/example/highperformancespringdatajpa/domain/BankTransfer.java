@@ -1,18 +1,22 @@
 package com.example.highperformancespringdatajpa.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor
-
+@DynamicUpdate
 public class BankTransfer {
     
     public enum State {
@@ -23,12 +27,15 @@ public class BankTransfer {
     @Id
     private String id;
 
+    @Version
+    private Long version;
+
     private String reference;
 
-    @ManyToOne
+    @ManyToOne(fetch= FetchType.LAZY)
     private Account sender;
 
-    @ManyToOne
+    @ManyToOne(fetch= FetchType.LAZY)
     private Account receiver;
 
     @Embedded
@@ -49,6 +56,6 @@ public class BankTransfer {
     public void settle() {
         this.state = State.SETTLED;
     }
-
+    
     
 }

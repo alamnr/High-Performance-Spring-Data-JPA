@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.example.highperformancespringdatajpa.domain.PhoneNumber.Type;
+import com.example.highperformancespringdatajpa.record.NamesOnly;
 
 import jakarta.persistence.EntityManager;
 
@@ -88,6 +89,16 @@ public class AccountRepositoryTest {
 
     }
 
+    @Test
+    void itShouldTestProjectionOfAccountByNamesOnly(){
+        // given 
+        NamesOnly namesOnly = accountRepository.findNamesOnlyById("sender-id2");
+        // when
+
+        // then
+        assertThat(namesOnly).isNotNull();
+        System.out.println(namesOnly); 
+      }
     @Test
     void itShouldTestFindByIdOrThrow() {
 

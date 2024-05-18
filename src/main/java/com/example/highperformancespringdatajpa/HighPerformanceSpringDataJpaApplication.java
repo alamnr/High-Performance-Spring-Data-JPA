@@ -1,15 +1,7 @@
 package com.example.highperformancespringdatajpa;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.example.highperformancespringdatajpa.domain.Account;
-import com.example.highperformancespringdatajpa.domain.AccountRepository;
-import com.example.highperformancespringdatajpa.domain.Address;
-import com.example.highperformancespringdatajpa.domain.PhoneNumber;
-import com.example.highperformancespringdatajpa.domain.PhoneNumber.Type;
 
 /**
  *

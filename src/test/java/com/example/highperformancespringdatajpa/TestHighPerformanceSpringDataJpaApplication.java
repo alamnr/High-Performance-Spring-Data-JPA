@@ -5,7 +5,10 @@ import java.util.UUID;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
+import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.utility.DockerImageName;
 
 import com.example.highperformancespringdatajpa.domain.Account;
 import com.example.highperformancespringdatajpa.domain.AccountRepository;
@@ -22,6 +25,13 @@ public class TestHighPerformanceSpringDataJpaApplication {
 	// PostgreSQLContainer<?> postgresContainer() {
 	// 	return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest")).withReuse(true);
 	// }
+
+	// @Bean
+	// @ServiceConnection
+	// MySQLContainer<?> mysqlContainer(){
+	// 	return new MySQLContainer<>(DockerImageName.parse("mysql:latest")).withReuse(true);
+	// }
+	
 
 	@Bean
 	ApplicationRunner applicationRunner(AccountRepository accountRepository, BankTransferRepository bankTransferRepository) {
